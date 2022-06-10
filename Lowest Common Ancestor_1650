@@ -1,0 +1,18 @@
+public Node lowestCommonAncestor(Node p, Node q) {
+        Set<Integer> nodeSet = new HashSet<>();
+        while(p != null) {
+            nodeSet.add(p.val);
+            p = p.parent;
+        }
+        
+        while(q != null) {
+            if(nodeSet.add(q.val)) {
+                q = q.parent;
+            }
+            else {
+                break;
+            }
+        }
+        
+        return q;
+    }
