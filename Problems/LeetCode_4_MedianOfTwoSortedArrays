@@ -1,0 +1,59 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if(nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
+        int low = 0;
+        int high = nums1.length;
+        int total = nums1.length + nums2.length;
+        while(low <= high) {
+            int mid = (low + high)/2;
+            int x = mid;
+            int y = ((total + 1) / 2) - x;
+            int firstLeft;
+            int firstRight;
+            int secondLeft;
+            int secondRight;
+            if(x == 0)
+                firstLeft = Integer.MIN_VALUE;
+            else
+                firstLeft = nums1[x - 1];
+            if(x == nums1.length)
+                firstRight = Integer.MAX_VALUE;
+            else
+                firstRight = nums1[x];
+            
+            if(y == 0)
+                secondLeft = Integer.MIN_VALUE;
+            else
+                secondLeft = nums2[y - 1];
+            if(y == nums2.length)
+                secondRight = Integer.MAX_VALUE;
+            else
+                secondRight = nums2[y];
+            
+            //System.out.println(firstLeft);
+            //System.out.println(firstRight);
+            //System.out.println(secondLeft);
+            //System.out.println(secondRight);
+            
+            if(firstLeft <= secondRight && secondLeft <= firstRight) {
+                if(total % 2 == 0) {
+                    return (double)(Math.max(firstLeft, secondLeft) + Math.min(firstRight, secondRight))/2;
+                }
+                else {
+                    return Math.max(firstLeft, secondLeft);
+                }
+            }
+            else {
+                if(firstLeft > secondRight) {
+                    high = mid - 1;
+                }
+                else {
+                    low = mid + 1;
+                }
+            }
+        }
+            return 0;
+    }
+}
