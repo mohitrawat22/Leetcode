@@ -1,0 +1,27 @@
+    int[] wsums;
+    public Solution(int[] w) {
+        for(int i=1;i<w.length;i++) {
+            w[i] = w[i-1] + w[i];
+        }
+        wsums = w;
+    }
+    
+    public int pickIndex() {
+        double mainRandom = Math.random() * wsums[wsums.length - 1];
+        int low = 0;
+        int high = wsums.length-1;
+        while(low <= high) {
+            int mid = (low + high)/2;
+            
+            if(wsums[mid] == mainRandom) {
+                return mid;
+            }
+            else if(wsums[mid] < mainRandom) {
+                low = mid + 1;
+            }
+            else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
