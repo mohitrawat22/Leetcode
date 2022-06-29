@@ -1,0 +1,32 @@
+public String convert(String s, int numRows) {
+        if(numRows == 1) {
+            return s;
+        }
+        
+        String str = "";
+        //int len = s.length();
+        int atIndex = 0;
+        for(int row = 0; row < numRows; row++) {
+            atIndex = row;
+            boolean up = true;
+            while(atIndex < s.length()) {
+                str = str + Character.toString(s.charAt(atIndex));
+                if(row == 0 || row == (numRows - 1)) {
+                    //str = str + Character.toString(s.charAt(atIndex));
+                    atIndex = atIndex + 2 * (numRows - 1);
+                }
+                else {
+                    if(up) {
+                        //str = str + Character.toString(s.charAt(atIndex));
+                        atIndex = atIndex + 2 * (numRows - (row+1));
+                    }
+                    else {
+                        atIndex = atIndex + 2 * row;
+                    }
+                    up = !up;
+                }
+            }
+        }
+        //System.out.println(str);
+        return str;
+        }
