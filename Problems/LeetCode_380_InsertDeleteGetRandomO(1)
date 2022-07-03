@@ -1,0 +1,35 @@
+List<Integer> rs;
+    Map<Integer, Integer> map;
+    public RandomizedSet() {
+        rs = new ArrayList<>();
+        map = new HashMap<>();
+    }
+    
+    public boolean insert(int val) {
+        if(map.containsKey(val)) {
+            return false;
+        }
+        map.put(val, rs.size());
+        rs.add(val);
+        //System.out.println(rs +"---"+map);
+        return true;
+    }
+    
+    public boolean remove(int val) {
+        if(map.containsKey(val)) {
+            //int index = map.get(val);
+            //int lastVal = rs.get(rs.size()-1);
+            rs.set(map.get(val), rs.get(rs.size()-1));
+            map.put(rs.get(rs.size()-1), map.get(val));
+            map.remove(val);
+            rs.remove(rs.size()-1);
+            return true;
+        }
+        return false;
+    }
+    
+    public int getRandom() {
+        Random random = new Random();
+        int randomNumber = rs.get(random.nextInt(rs.size()));
+        return randomNumber;
+    }
