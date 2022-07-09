@@ -1,0 +1,24 @@
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0;
+        ListNode head = new ListNode();
+        ListNode l3 = head;
+        while(l1 != null || l2 != null) {
+            int firstNum = (l1 != null ? l1.val : 0);
+            int secondNum = (l2 != null ? l2.val : 0);
+            
+            int sum = firstNum + secondNum + carry;
+            carry = sum / 10;
+            int lastDigit = sum % 10;
+            l3.next = new ListNode(lastDigit);
+            
+            if(l1 != null) 
+                l1 = l1.next;
+            if(l2 != null) 
+                l2 = l2.next;
+            l3 = l3.next;
+        }
+        if(carry > 0) {
+            l3.next = new ListNode(carry, null);
+        }
+        return head.next;
+    }
