@@ -1,0 +1,17 @@
+int sum = 0;
+    public int depthSum(List<NestedInteger> nestedList) {
+        sumElements(nestedList, 1);
+        return sum;
+    }
+    
+    public void sumElements(List<NestedInteger> nestedList, int depth) {
+        for(int i=0;i<nestedList.size();i++) {
+            if(nestedList.get(i).isInteger()) {
+                //Integer element = nestedList.get(i);
+                sum = sum + (depth * nestedList.get(i).getInteger());
+            }
+            else {
+                sumElements(nestedList.get(i).getList(), depth+1);
+            }
+        }
+    }
