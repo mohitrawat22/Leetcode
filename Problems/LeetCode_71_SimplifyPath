@@ -1,0 +1,16 @@
+public String simplifyPath(String path) {
+        Stack<String> stack = new Stack();
+        String[] pathAttributes = path.split("/");
+        for (String dir : path.split("/")) {
+            
+            if("..".equals(dir) && !stack.isEmpty()) {
+                stack.pop();
+            }
+            else if(!(".".equals(dir) || "".equals(dir) || "..".equals(dir))) {
+                stack.push(dir);
+            }
+        }
+        
+        List<String> list = new ArrayList(stack);
+        return "/"+String.join("/", list);
+    }
