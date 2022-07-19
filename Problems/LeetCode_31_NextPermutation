@@ -1,0 +1,40 @@
+public void nextPermutation(int[] nums) {
+        int pivot = 0;
+        boolean pivotFound = false;
+        int next = -1;
+        for(int i=1;i<nums.length;i++) {
+            if(nums[i-1] < nums[i]) {
+                pivot = i-1;
+                pivotFound = true;
+                next = i;
+            }
+            if(pivotFound && (nums[pivot] < nums[i] && nums[next] >= nums[i]))
+                next = i;
+        }
+        int start = 0;
+        int end = 0;
+        if(!pivotFound) {
+            start = 0;
+            end = nums.length-1;
+            while(start < end) {
+                int swap1 = nums[start];
+                nums[start] = nums[end];
+                nums[end] = swap1;
+                start++;
+                end--;
+            }
+            return;
+        }
+        int swap = nums[pivot];
+        nums[pivot] = nums[next];
+        nums[next] = swap;
+        start = pivot + 1;
+        end = nums.length-1;
+        while(start < end) {
+            int swap1 = nums[start];
+            nums[start] = nums[end];
+            nums[end] = swap1;
+            start++;
+            end--;
+        }
+    }
