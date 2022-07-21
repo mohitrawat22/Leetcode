@@ -1,0 +1,28 @@
+public String decodeString(String s) {
+        Stack<Integer> stackNum = new Stack<>();
+        Stack<String> stackString= new Stack<>();
+        String str = "";
+        for(int i=0;i<s.length();i++) {
+            if(Character.isDigit(s.charAt(i))) {
+                int count = 0;
+                while(Character.isDigit(s.charAt(i))) {
+                    count = count * 10 + (s.charAt(i) - '0');
+                    i++;
+                } 
+                stackNum.push(count);
+                i--;
+            }
+            else if(s.charAt(i) == '[') {
+                stackString.push(str);
+                str = "";
+            }
+            else if(s.charAt(i) == ']') {
+                String temp = stackString.pop();
+                str = temp + str.repeat(stackNum.pop());
+            }
+            else {
+                str = str + s.charAt(i);
+            }
+        }
+        return str;
+    }
